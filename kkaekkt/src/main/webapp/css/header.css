@@ -1,79 +1,83 @@
 .head_container {
-  top: 0;
-  position: fixed;
-  width: 100%;
-  height: 75px;
-  background-color: white;
-  z-index: 29;
-  flex-wrap: wrap;
-  color: var(--dark-gray);
+	top: 0;
+	position: fixed;
+	width: 100%;
+	height: 75px;
+	background-color: white;
+	z-index: 29;
+	flex-wrap: wrap;
+	color: var(--dark-gray);
 }
+
 .head_container a {
-  text-decoration: none;
-  color: var(--dark-gray);
+	text-decoration: none;
+	color: var(- -dark-gray);
 }
 
 .head {
-  display: flex;
-  justify-content: space-between;
-  /* padding: 9px 50px; */
-  padding: 0 100px;
-  flex-wrap: wrap;
+	display: flex;
+	justify-content: space-between;
+	/* padding: 9px 50px; */
+	padding: 0 100px;
+	flex-wrap: wrap;
 }
 
 /* .menu a {
   margin-right: 25px;
 } */
-
 .menu {
-  display: flex;
-  margin: auto 0;
-  bottom: 0;
-  /* margin: auto; */
-  /* bottom: 0; */
-  /* margin-left: 20px; */
-  font-weight: bolder;
-  font-size: 23px;
+	display: flex;
+	margin: auto 0;
+	bottom: 0;
+	/* margin: auto; */
+	/* bottom: 0; */
+	/* margin-left: 20px; */
+	font-weight: bolder;
+	font-size: 23px;
 }
 
 .menu ul li {
-  float: left;
-  margin-right: 30px;
+	float: left;
+	margin-right: 58px;
 }
+
 .head_right ul li {
-  float: left;
-  margin-left: 26px;
+	float: left;
+	margin-left: 26px;
 }
+
 .head_right {
-  display: flex;
-  margin: auto 0;
-  bottom: 0;
-  font-size: 18px;
-  font-weight: bolder;
+	display: flex;
+	margin: auto 0;
+	bottom: 0;
+	font-size: 18px;
+	font-weight: bolder;
 }
+
 .head_right .fas {
-  font-size: 23px;
-  cursor: pointer;
+	font-size: 23px;
+	cursor: pointer;
 }
+
 .head_right span {
-  font-size: larger;
+	font-size: larger;
 }
+
 .head_logo {
-  display: flex;
-  flex-wrap: wrap;
-  position: fixed;
-  margin: auto 0;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 9px;
+	display: flex;
+	flex-wrap: wrap;
+	position: fixed;
+	margin: auto 0;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 9px;
 }
 /* .logo {
   margin-right: 30px;
 } */
-
 .logo img {
-  width: 195px;
-  padding: 10px;
+	width: 195px;
+	padding: 10px;
 }
 
 /* 비회원일 때 margin */
@@ -86,118 +90,152 @@
   border: none;
   font-size: 15px;
 } */
-
-#bellBox,
-#chatBox {
-  margin: 0 10px;
-  position: relative;
+#bellBox, #chatBox {
+	margin: 0 10px;
+	position: relative;
 }
 
 #bellBox .alertDot {
-  /*종 닷*/
-  position: absolute;
-  display: none;
-  font-size: 10px;
-  left: 12px;
-  top: -8px;
-  color: white;
-  background: red;
-  border-radius: 20px;
-  padding: 0px 4px 1px 3px;
-  text-align: center;
-  min-width: 10px;
+	/*종 닷*/
+	position: absolute;
+	display: none;
+	font-size: 10px;
+	left: 12px;
+	top: -8px;
+	color: white;
+	background: red;
+	border-radius: 20px;
+	padding: 0px 4px 1px 3px;
+	text-align: center;
+	min-width: 10px;
 }
-#chatBox .chatDot {
-  /*챗 닷*/
-  position: absolute;
-  display: none;
-  font-size: 1px;
-  left: 18px;
-  top: -8px;
-  color: red;
+
+#chatBox .chatDotPs {
+	/*유저챗 닷*/
+	display: none;
+	position: absolute;
+	font-size: 1px;
+	left: 18px;
+	top: -8px;
+	border-radius: 20px;
+	padding: 0px 4px 1px 3px;
+	text-align: center;
+	min-width: 10px;
+	background-color: red;
+	color: white;
 }
+
+#chatBox .chatDotBs {
+	/*업체챗 닷*/
+	display: none;
+	position: absolute;
+	font-size: 1px;
+	left: 18px;
+	top: -8px;
+	border-radius: 20px;
+	padding: 0px 4px 1px 3px;
+	text-align: center;
+	min-width: 10px;
+	background-color: red;
+}
+
 #noticeBox {
-  display: none;
-  position: absolute;
-  width: 235px;
-  right: 25px;
-  border: 1px solid var(--gray-color);
-  box-shadow: 7px 10px 12px 0px rgba(196, 196, 196, 0.5);
-  background-color: white;
-  border-radius: 10px;
-  border-top-right-radius: 0px;
+	display: none;
+	position: absolute;
+	width: 235px;
+	right: 25px;
+	border: 1px solid var(- -gray-color);
+	box-shadow: 7px 10px 12px 0px rgba(196, 196, 196, 0.5);
+	background-color: white;
+	border-radius: 10px;
+	border-top-right-radius: 0px;
 }
+
 #noticeBox a {
-  color: black;
-  margin: 0;
+	color: black;
+	margin: 0;
 }
+
 #noticeBox ul {
-  margin: 0;
-  max-height: 394px;
-  overflow: scroll;
-  font-weight: normal;
+	margin: 0;
+	max-height: 394px;
+	overflow: scroll;
+	font-weight: normal;
 }
+
 #noticeBox ul::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
+
 #noticeBox li {
-  border-bottom: 1px solid var(--gray-color);
-  padding: 11px 17px;
-  margin-bottom: -1px;
-  position: relative;
-  font-size: 12px;
-  cursor: pointer;
-  margin: 0;
-  float: none;
+	border-bottom: 1px solid var(- -gray-color);
+	padding: 11px 17px;
+	margin-bottom: -1px;
+	position: relative;
+	font-size: 12px;
+	cursor: pointer;
+	margin: 0;
+	float: none;
 }
+
 #noticeBox li:hover {
-  background-color: var(--key-color);
+	background-color: var(- -key-color);
 }
+
 .msgTop {
-  width: 190px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  color: gray;
+	width: 190px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: gray;
 }
+
 #noticeBox button {
-  width: 100%;
-  border: none;
-  height: 40px;
-  font-size: 14px;
-  background: rgb(249 249 249);
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+	width: 100%;
+	border: none;
+	height: 40px;
+	font-size: 14px;
+	background: rgb(249, 249, 249);
+	border-radius: 10px;
+	border-top-right-radius: 0px;
 }
+
 #noticeBox button:hover {
-  cursor: pointer;
-  background-color: var(--key-color);
+	cursor: pointer;
+	background-color: var(- -key-color);
 }
+
 #noticeBox li .fas {
-  position: absolute;
-  top: 23px;
-  right: 15px;
-  font-size: 10px;
-  color: var(--text-gray);
+	position: absolute;
+	top: 23px;
+	right: 15px;
+	font-size: 10px;
+	color: var(- -text-gray);
 }
+
 .msgBody:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
+
 .msgBottom {
-  width: 185px;
-  display: flex;
-  justify-content: space-between;
-  color: gray;
+	width: 185px;
+	display: flex;
+	justify-content: space-between;
+	color: gray;
 }
-.msgTop span{
-  font-size: unset;
+
+.msgTop span {
+	font-size: unset;
 }
-.msgBottom span{
-  font-size: unset;
+
+.msgBottom span {
+	font-size: unset;
 }
+
 .msgHeader {
-  color: var(--key-text);
+	color: var(- -key-text);
 }
+
 .read {
-  color: rgb(116 116 116 / 50%) !important;
+	color: rgb(116 116 116/ 50%) !important;
 }

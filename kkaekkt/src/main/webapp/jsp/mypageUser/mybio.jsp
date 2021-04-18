@@ -15,6 +15,7 @@
 	<jsp:include page="/jsp/headerPs.jsp"></jsp:include>
 
 	<div class="body_container">
+	<div id="mask"></div>
 		<jsp:include page="sidebar_ps.jsp"></jsp:include>
 		<div class="content">
 			<form action="/updatePs.do" method="POST" name="mybio">
@@ -39,8 +40,8 @@
 						<tr>
 							<td>비밀번호</td>
 							<td><input name="password" type="password" id="curpwd">
-								<button type="button" id="btn_checkpwd">수 정</button>
-								<label id="checkpwd"></label></td>
+								<button type="button" id="btn_checkpwd">수 정</button> <label
+								id="checkpwd"></label></td>
 						</tr>
 						<div id="btn_mybiopwd">
 							<tr>
@@ -129,11 +130,11 @@
 								<input id="deleteid" name="id" value="${sessionScope.user.id}"
 									readonly />
 							</p>
-							<input type="password" name="password" id="deletepwd">
+							<input type="password" name="password" id="deletepwd" placeholder="비밀번호">
 						</div>
 						<br>
 						<div id="modal_foot">
-							<input id="yes" type="button" value="예" onclick="deleteUser()" />
+							<input id="yes" type="button" value="예" onclick="cheekpwd()" />
 							<input id="nope" type="button" value="아니오" />
 						</div>
 						<!--  </form> -->

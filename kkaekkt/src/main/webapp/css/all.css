@@ -124,11 +124,10 @@ a {
   color: black;
 }
 .chatHeader{
-    width: 95%;
-    height: 38px;
-    margin: 20px auto 5px;
-    box-shadow: 0px 1px 0px 0px lightgrey;
-    display: none;
+  width: 95%;
+  height: 38px;
+  margin: 20px auto 5px;
+  box-shadow: 0px 1px 0px 0px lightgrey;
 }
 .chatHeader p {
   text-align: left;
@@ -165,6 +164,7 @@ a {
   float: left;
   width: 55%;
   font-weight: normal;
+  position: relative;
 }
 .chatList li:nth-child(1) p:nth-child(1){
   font-size: 14px;
@@ -183,6 +183,58 @@ a {
   float: right;
   margin-left: unset;
 }
+.chatRogUl .dateLine{ /*날짜 경계선 li*/
+  position: relative;
+  margin: 15px 0;
+}
+.chatRogUl .dateLine hr{
+  height: 1px;
+  background: var(--gray-color);
+  border: none;
+}
+.chatRogUl .dateLine .dateRog{
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-gray);
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: -9px;
+  background: white;
+  display: block;
+  width: 93px;
+  margin: auto;
+  height: 20px;
+  font-weight: unset;
+}
+.rlDot{
+  display: none;
+  position: absolute;
+  font-size: 1px !important; /*헤더 css충돌 부분*/
+  left: -27px;
+  top: 10px;
+  border-radius: 20px;
+  padding: 0px 4px 1px;
+  text-align: center;
+  min-width: 10px;
+  background-color: red;
+  color: white;
+}
+.chatStNum{
+  font-size: 1px;
+  color: #ff8100;
+}
+.timeStDiv{
+  display: inline-block;
+  position: relative;
+  top: 12px;
+}
+.timeStDivLeft{
+  left: 5px;
+}
+.timeStDivRight{
+  right: 5px;
+}
 .chatExitBtn{
   width: 60px;
   height: 30px;
@@ -193,6 +245,7 @@ a {
   font-weight: 800;
   color: rgb(73,135,255);
   /* margin: 0% 0% 30%; */
+  font-size: 13px;
 }
 
 .chatExitBtn:hover{
@@ -237,6 +290,7 @@ a {
   position: relative;
   padding: 10px 15px 15px 15px;
   font-size: 18px;
+  color: var(--black-color);
 }
 .closeChatBtn{
   position: absolute;
@@ -282,6 +336,7 @@ a {
   background-color: rgb(73,135,255);
   position: relative;
   top: 12px;
+  font-size: 14px;
 }
 .chatRogli{
   margin-bottom: 10px;
@@ -307,6 +362,7 @@ a {
 .chatGuest{
   background-color: rgb(235, 235, 235);
   border-bottom-left-radius: 0px;
+  color: var(--black-color);
 }
 .chatMine{
   background-color: rgb(73,135,255);

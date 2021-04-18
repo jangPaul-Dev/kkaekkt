@@ -1,21 +1,6 @@
 
-.content {
-	width: 530px;
-	text-align: center;
-	margin: auto;
-	padding-top: 30px
-}
 
-
-.login {
-	text-align: center;
-	margin: auto;
-	border: 1px solid;
-	width: 530px;
-	height: 660px;
-}
-
-hr{
+#modal_foot hr {
 	height: 0.5px;
 	border: none;
 	background-color: #C4C4C4;
@@ -23,16 +8,29 @@ hr{
 	width: 85%;
 }
 
-
-.login_box{
-	margin-left:12%;
+#login {
+	width: 324px;
+	height: 59px;
+	left: 557px;
+	top: 478px;
+	margin-bottom: 20px;
+	border: none;
 }
+
+
+
+.login_box {
+	margin-left: 12%;
+}
+
 .login_box input {
 	border: solid 1px #C4C4C4;
-	width: 82%;
-	height: 54px;
-	margin-bottom: 21px;
-	border-radius: 20px;
+	width: 326px;
+	height: 50px;
+	left: 556px;
+	top: 339px;
+	margin: 10px;
+	border-radius: 10px;
 }
 
 .content button {
@@ -46,51 +44,51 @@ hr{
 	text-align: center;
 	margin-bottom: 60px;
 }
-.login_API{
-	margin-left:28%;
+
+.login_API {
+	margin-left: 28%;
 }
+
 .login_API img {
 	width: 80px;
 	/* position: relative;
 	left: 80px; */
 }
+
 .login_foot {
+	margin-left: 12%;
 }
+
 .login_foot p {
-	margin: 0;
-	padding: 0;
 	font-size: 9pt;
 	color: #BCBCBC;
 	/* position: relative;
     left: 33%; */
 	margin-top: 30px;
-	text-align: center;
+	margin-left: 22%;
 }
 
 .finds {
 	/* position: relative;
 	left: 13%; */
 	margin-left: 17%;
-	color: var(--dark-gray);
 }
 
 .finds a {
 	margin: 30px;
+	color: var(--dark-gray);
+	text-decoration: none;
 }
 
 .the_others p {
 	/* position: relative;
     left: 33%; */
-	text-align: center;
+	margin-top: 20px;
+	margin-left: 35%;
+	color: var(--black-color);
 }
 
-/* ëª¨ë‹¬ ì˜ì—­ */
-.word {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
-}
-
+/* 모달 영역 */
 #modal_container {
 	display: none;
 	position: relative;
@@ -99,7 +97,7 @@ hr{
 	height: 650px;
 	background-color: white;
 	border: 1px solid lightgray;
-	z-index:31;
+	z-index: 9999;
 	/* 	box-shadow: 5px 12px 5px rgb(212, 212, 212); */
 }
 
@@ -116,16 +114,19 @@ hr{
 
 #modal_bodycont {
 	margin-top: 28px;
-    height: 80%;
-    padding-block: 14px;
+	height: 80%;
+	padding-block: 14px;
 }
 
 #modal_head {
 	width: 80%;
 	height: 80px;
 	text-align: center;
-	color: var(--dark-gray);
 	margin: 0 auto;
+}
+
+#modal_head h2 {
+  color: var(--black-color);
 }
 
 /* #modal_foot {

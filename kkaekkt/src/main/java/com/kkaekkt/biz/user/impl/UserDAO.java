@@ -198,4 +198,17 @@ public class UserDAO {
 	public void updateCloserOut(ChatVO vo) {
 		mybatis.update("UserDAO.updateCloserOut",vo);
 	}
+	public int getBno(ChatVO vo) {
+		return mybatis.selectOne("UserDAO.getBno",vo);
+	}
+	public List<ChatVO> getMyRoomLi(ChatVO vo) {
+		return mybatis.selectList("UserDAO.getMyRoomLi",vo);
+		
+	}
+	public ChatVO getBsGuestData(ChatVO guest) {
+		return mybatis.selectOne("UserDAO.getBsGuestData",guest);
+	}
+	public ChatVO getPsGuestData(ChatVO guest) {
+		return mybatis.selectOne("UserDAO.getPsGuestData",guest);		
+	}
 }

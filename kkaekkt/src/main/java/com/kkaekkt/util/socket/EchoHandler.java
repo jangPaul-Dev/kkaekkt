@@ -22,7 +22,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	//서버에 접속이 성공 했을때
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("서버에 접속 성공했을 때 접근");
+		System.out.println("소켓 열기");
 		sessions.add(session);
 		String mno = getMno(session);
 		userSessionsMap.put(mno, session);
@@ -45,6 +45,7 @@ public class EchoHandler extends TextWebSocketHandler {
 				if(boardWriterSession != null) {//작성자가 세션에 있다면, 
 					TextMessage sendMsg = new TextMessage(msgType+content);
 					boardWriterSession.sendMessage(sendMsg);// 메시지를 보낸다.
+					System.out.println("송신완료");
 			}
 		}
 	}

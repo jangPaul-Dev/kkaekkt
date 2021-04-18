@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+	<link rel="stylesheet" href="/css/all.css">
+	<link rel="stylesheet" href="/css/header.css">
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
@@ -11,12 +12,14 @@
 			senderName: `${sessionScope.user.name}`,
 			mtype: ${ sessionScope.user.mtype }
 			};
-		var chatObj={sender:alertObj.sender};
+		var chatObj={
+			sender:alertObj.sender,
+			mtype:alertObj.mtype		
+		};
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
-	<link rel="stylesheet" href="/css/all.css">
-	<link rel="stylesheet" href="/css/header.css">
+
 	<header class="head_container">
 		<nav class="head">
 			<div class="menu">
@@ -41,9 +44,7 @@
 							<i class="fas fa-bell"></i>
 							<span class="alertDot"></span>
 							<div id="noticeBox">
-								<ul id="noticeUl">
-
-								</ul>
+								<ul id="noticeUl"></ul>
 								<button>내 알림 전체보기</button>
 							</div>
 						</div>
@@ -52,7 +53,7 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="chatDot"></span>
+							<span class="chatDot chatDotPs"></span>
 							<div id="chatCont">
 								<div class="chatHeader">
 										<p>💬 채팅상담</p>

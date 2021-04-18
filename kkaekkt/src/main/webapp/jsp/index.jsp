@@ -8,12 +8,40 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
+            <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+            <!-- <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script> -->
             <link rel="stylesheet" href="/css/fullpage.min.css">
             <script src="/js/fullpage.min.js"></script>
+            <!-- <link rel="stylesheet" href="/css/index.css"> -->
+            <!-- <link rel="stylesheet" href="/css/all.css"> -->
+            <!-- <link rel="stylesheet" href="/css/header.css"> -->
+            <!-- <link rel="stylesheet" href="/css/indexFullpage.css"> -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
         </head>
-		
+
         <body>
+            <!-- <header class="head_container">
+		        <nav class="head">
+		            <div class="menu">
+		                <a href="/showMap.do?type=1">일반세탁소</a>
+		                <a href="/showMap.do?type=2">코인세탁소</a>
+		            </div>
+		            <div class="head_logo">
+		                <div class="logo">
+		                    <a href="/index.do"> <img src="/img/logo-white.png" alt="">
+		                    </a>
+		                </div>
+		            </div>
+		
+		            <div class="head_right">
+		                <a href="/jsp/join/joinTerms.html">회원가입</a>
+		                <a href="/jsp/login/login.jsp">로그인</a>
+		                <a href="/jsp/faq.jsp">FAQ</a>
+		            </div>
+		        </nav>
+    		</header> -->
+
             <c:choose>
                 <c:when test="${user.mtype==1}">
                     <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
@@ -25,7 +53,6 @@
                     <jsp:include page="/jsp/header.jsp"></jsp:include>
                 </c:otherwise>
             </c:choose>
-            
             <script type="text/javascript">
                 window.onload = function () {
                     document.getElementById("logoImg").src = "/img/logo-white.png"
@@ -41,8 +68,8 @@
                         <div class="search_btn">
                             <!-- <h1 class="animate__animated animate__fadeInUp">오늘은 <br> -->
                             <h1>오늘은 <br>
-		                                어디서 <br>
-		                                빨래를 할까요?
+                                어디서 <br>
+                                빨래를 할까요?
                             </h1>
                             <div class="search_tab">
                                 <button class="tabBtn btn1" type="button" value='1'>일반세탁소</button>
@@ -51,7 +78,7 @@
                         </div>
 
                         <div class="search_box">
-                            <input type="text" placeholder="동네 또는 세탁소 이름을 입력해주세요" name="search" id="searchBar">
+                            <input type="text" placeholder="동네를 입력하세요" name="search" id="searchBar">
                             <button onclick='showMap()'>
                                 <i class="fas fa-search fa-lg "></i>
                                 <!-- <i class="fas fa-search fa-2x"></i> -->

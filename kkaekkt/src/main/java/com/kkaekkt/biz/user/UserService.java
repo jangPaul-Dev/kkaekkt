@@ -38,4 +38,6 @@ public interface UserService {
 	public void sendChat(ChatVO vo);
 	public void readChat(ChatVO vo);
 	public void exitChatRoom(ChatVO vo);
+	public List<ChatVO> readChatRog(ChatVO vo);
+	public List<ChatVO> initRoomLi(ChatVO vo);
 }

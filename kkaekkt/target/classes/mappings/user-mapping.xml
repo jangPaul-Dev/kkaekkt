@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+	<select id="getMyRoomLi" resultType="chat">
+		<if test="mtype==1"><!-- 개인회원일 때 -->
+			SELECT b.mno addressee, <!-- 수신인 번호 -->
+			       bname guest, <!-- 수신인 명 -->
+			       cr.roomnum, <!-- 방번호 -->
+			       content, <!-- 채팅 내용 -->
+				   counts <!-- 읽지 않은 채팅의 개수 -->
+			  FROM chatroom cr, 
+			       business b,
+			       (SELECT content,
+			               chatno,
+			               roomnum
+			          FROM chat 
+					 WHERE chatno IN (SELECT max(chatno)
+										FROM chat
+									GROUP BY roomnum)
+				   ) c <!-- 마지막 채팅을 조회하기 위한 서브쿼리 -->
+	     LEFT JOIN (SELECT count(chatno) counts, <!-- 행에 정보가 없더라도 표시하기 위한 left 조인 -->
+				           roomnum 
+				      FROM chat 
+				     WHERE state=0
+				       AND addressee=#{sender} 
+				  GROUP BY roomnum
+				   ) ct ON c.roomnum=ct.roomnum <!-- 안읽은 채팅의 개수를 조회하기 위한 서브쿼리 -->
+			 WHERE cr.bno=b.bno
+			   AND cr.roomnum=c.roomnum 
+			   AND cr.mno=#{sender} <!-- 본인 회원번호 -->
+		</if>
+		<if test="mtype!=1"><!-- 업체회원일 때 -->
+			SELECT cr.mno addressee, <!-- 수신인 번호 -->
+			       mname guest, <!-- 수신인 명 -->
+			       cr.roomnum, <!-- 방번호 -->
+			       content,
+			       counts <!-- 읽지 않은 채팅의 개수 -->
+			  FROM chatroom cr, 
+			       `member` m, 
+			       business b,
+			       (SELECT content,
+			               chatno,
+			               roomnum
+			          FROM chat 
+					 WHERE chatno IN (SELECT max(chatno)
+										FROM chat
+									GROUP BY roomnum)
+				   ) c <!-- 마지막 채팅을 조회하기 위한 서브쿼리 --> 
+	     LEFT JOIN (SELECT count(chatno) counts, <!-- 행에 정보가 없더라도 표시하기 위한 left 조인 -->
+				           roomnum 
+				      FROM chat 
+				     WHERE state=0
+				       AND addressee=#{sender} 
+				  GROUP BY roomnum
+				   ) ct ON c.roomnum=ct.roomnum <!-- 안읽은 채팅의 개수를 조회하기 위한 서브쿼리 -->
+			 WHERE cr.mno=m.mno 
+			   AND b.bno=cr.bno
+			   AND cr.roomnum=c.roomnum
+			   AND b.mno=#{sender}; <!-- 본인회원번호 -->
+		</if>
+	</select>
+	<select id="getBno" resultType="_int">
+		SELECT bno FROM business WHERE mno=#{sender};
+	</select>
 	<insert id="insertCloser">
 		INSERT INTO closer (roomnum,closermno) VALUES (#{roomnum},#{sender});
 	</insert>
-	<select id="chkCloserMe">
+	<select id="chkCloserMe" resultType="_int">
 		SELECT count(closermno) FROM closer WHERE roomnum=#{roomnum} AND closermno=#{closer};
 	</select>
 	<delete id="deleteRoom">
@@ -17,7 +78,7 @@
 		INSERT INTO chat (roomnum,sender,addressee,content) VALUES (#{roomnum},#{sender},#{addressee},#{content});
 	</insert>
 	<select id="getChatRog" resultType="chat">
-		SELECT sender,content,date_format(stime,'%Y.%m.%d %T') stime FROM chat WHERE roomnum=#{roomnum}
+		SELECT sender,content,date_format(stime,'%Y년 %c월 %e일 %p %k:%i') stime, state,roomnum FROM chat WHERE roomnum=#{roomnum}
 		<if test='closetime!="null"'><!-- 파라미터가 공백이 아니라면 -->
 			<![CDATA[AND stime>#{closetime}]]>
 		</if>
@@ -27,16 +88,16 @@
 		UPDATE chat SET state=1 WHERE roomnum=#{roomnum} AND addressee=#{sender};
 	</update>
 	<update id="updateCloserOut">
-		UPDATE SET state=0 FROM closer WHERE roomnum=#{roomnum} AND closermno=#{sender};
+		UPDATE closer SET state=0, closetime=now() WHERE roomnum=#{roomnum} AND closermno=#{sender};
 	</update>
 	<update id="updateCloserIn">
-		UPDATE SET state=1 FROM closer WHERE roomnum=#{roomnum} AND closermno=#{closer}; 
+		UPDATE closer SET state=1 WHERE roomnum=#{roomnum} AND closermno=#{closer}; 
 	</update>
 	<select id="chkCloser" resultType="chat">
 		SELECT if(count(closermno)=0,'null',date_format(closetime,'%Y.%m.%d %T')) closetime, 
 		       ifnull(state,0) state 
 		  FROM closer 
-		 WHERE roomnum=#{roomnum} 
+		 WHERE roomnum=#{roomnum}
 		   AND closermno=#{closer};
 	</select>
 	<insert id="createRoom">

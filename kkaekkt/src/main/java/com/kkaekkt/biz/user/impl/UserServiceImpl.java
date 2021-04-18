@@ -92,8 +92,7 @@ public class UserServiceImpl implements UserService {
 			return "fail";
 		}
 		return null;
-	}
-	
+	}	
 	// 로그인 들
 	
 	
@@ -262,5 +261,16 @@ public class UserServiceImpl implements UserService {
 		}else {//상대방이 나갔다면
 			userDao.deleteRoom(vo);
 		}
+	}
+	@Override
+	public List<ChatVO> readChatRog(ChatVO vo) {
+		ChatVO closer=userDao.chkCloser(vo);
+		vo.setClosetime(closer.getClosetime());//나간 시간을 입력한다.
+		userDao.updateChatRog(vo);//로그를 읽음처리한다.
+		return userDao.getChatRog(vo);//채팅 로그를 가져온다.
+	}
+	@Override
+	public List<ChatVO> initRoomLi(ChatVO vo) {
+		return userDao.getMyRoomLi(vo);
 	}
 }

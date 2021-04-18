@@ -84,7 +84,7 @@ i {
   /* margin-top: 90px; */
   justify-content: center;
   border-radius: 40px;
-  box-shadow: 5px 5px 10px 10px rgba(196, 196, 196, 0.2);
+  box-shadow:4px 9px 13px 8px rgb(196 196 196 / 20%);
 }
 
 .user_btn:hover {

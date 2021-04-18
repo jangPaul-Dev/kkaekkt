@@ -386,47 +386,40 @@ function printlist(list) {
   });
 }
 
-function modal_userInfo(mno) {
+function modal_userInfo(mno){
   $("#mask").show();
   $("#modal_userInfo").show();
   $("#userInfo_bodycont *").remove();
   $.ajax({
-    url: "/getuserInfo.do",
-    type: "post",
-    data: {
-      mno: mno,
-    },
-    success: function (data) {
-      let info = JSON.parse(data);
-      let address = info.address.replaceAll(",", " ");
-      $("#userInfo_bodycont").append(
-        '<table class="userInfo">' +
-          "<tr>" +
-          "<th>회원번호</th>" +
-          "<td>" +
-          info.mno +
-          "</td>" +
-          "</tr>" +
-          "<tr>" +
-          "<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>" +
-          "<td>" +
-          info.name +
-          "</td>" +
-          "</tr>" +
-          "<tr>" +
-          "<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>" +
-          "<td>" +
-          info.phone +
-          "</td>" +
-          "</tr>" +
-          "<tr>" +
-          "<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>" +
-          "<td>" +
-          address +
-          "</td>" +
-          "</tr>" +
-          "</table>"
-      );
-    },
+      url: '/getuserInfo.do',
+      type: 'post',
+      data: {
+          mno: mno,   
+      }, success: function(data){
+          let info = JSON.parse(data);
+          let address = (info.address).replaceAll(",", " ");
+        $("#userInfo_bodycont").append(
+            '<table class="userInfo">' +
+            '<tr>'+
+                  '<th>회원번호</th>' +
+                  '<td>'+ info.mno + '</td>' +
+              '</tr>' +
+              '<tr>'+
+                  '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
+                  '<td>'+ info.name + '</td>' +
+              '</tr>' +
+              '<tr>'+
+                  '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +
+                  '<td>'+ info.phone + '</td>' +
+              '</tr>' +
+              '<tr>'+
+                  '<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>' +
+                  '<td>'+ address + '</td>' +
+              '</tr>' +
+            '</table>'
+           
+        )
+      }   
+
   });
 }

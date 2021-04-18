@@ -77,7 +77,7 @@
                             </ul>
 
                         </div>
-                        <div class="user_btn" onclick="location.href='joinCompany.html'">
+                        <div class="user_btn" onclick="location.href='joinCompany.jsp'">
                             <ul>
                                 <li>
                                     <i class="far fa-building fa-5x"></i>
@@ -91,19 +91,9 @@
                         </div>
                     </div>
                 </div>
-                <footer>
-                    <p><img src="img/logo-nowater.png" alt="" style="width: 100px;"></p>
-                    kkækkt <br>
-                    info@kkækkt.com <br>
-                    Copyright © 2021 All right Reserved.
-
-                    <div>
-                        고객센터
-                        전화문의 1833-3429
-                        평일 오전 9시 ~ 오후 6시 (주말. 공휴일 휴무)
-                        제휴문의 : business@lifegoeson.kr
-                    </div>
-                </footer>
+                <!-- <footer>
+                
+                </footer> -->
             </div>
 
 

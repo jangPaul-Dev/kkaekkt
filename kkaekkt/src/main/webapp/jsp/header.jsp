@@ -2,15 +2,19 @@
 	<link rel="stylesheet" href="/css/all.css">
 	<link rel="stylesheet" href="/css/header.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+		rel="stylesheet">
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"charset="utf-8"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+		charset="utf-8"></script>
 	<script src="/js/login.js"></script>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
+
+
 	<header class="head_container">
-	<div id="mask"></div>		
+		<div id="mask"></div>
 		<nav class="head">
 			<div class="menu">
 				<ul>
@@ -26,17 +30,15 @@
 			</div>
 			<div class="head_right">
 				<ul>
-					<li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
-					<li><a id="modal_show">로그인</a></li>
+					<li><a href="/jsp/join/joinTerms.jsp">회원가입</a></li>
+					<li><a id="modal_show" style="cursor: pointer;">로그인</a></li>
 					<li><a href="/jsp/faq.jsp">FAQ</a></li>
 				</ul>
 			</div>
 		</nav>
-		
+
 		<div id="modal_container">
-			<button id="modal_close">
-				 <i class="fas fa-times"></i>
-			</button>
+			<button id="modal_close"><i class="fas fa-times"></i></button>
 			<div id="modal_bodycont">
 				<form>
 					<div id="modal_head">
