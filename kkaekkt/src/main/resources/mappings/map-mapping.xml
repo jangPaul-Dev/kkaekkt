@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MapListDAO">
+
+	<!-- List 검색시 데이터 바인딩 -->
+	<select id="selecList" parameterType="account" resultType="maplist">
+			SELECT b.bname  
+				 , b.bno
+				 , b.phone
+				 , b.address
+				 , COUNT(c.content) AS content
+				 , c.rdate
+				 , AVG(c.grade)  AS grade
+			 FROM business b
+			 JOIN comments c ON b.bno = c.bno
+			WHERE b.address LIKE CONCAT('%',#{address},'%')
+			  AND b.typeNum = #{mtype}
+			GROUP BY b.bno;
+	</select>
+	<!-- 업체 시간 조회 -->
+	<select id="selectSingle" parameterType="int" resultType="single">
+			SELECT no
+				 , name
+				 , week
+				 , time
+			  FROM laundrytime
+			 WHERE time NOT LIKE'%00:00~00:00%'
+			   AND no = #{bno};
+	</select>
+	
+	<!-- like 유무 확인 조회 -->
+	<select id="selectLike" parameterType="single" resultType="_int">
+			SELECT IFNULL(count(mno),0)
+			  FROM liked
+			 WHERE bno = #{bno}
+			   AND mno = #{mno};
+	</select>
+	
+	<!-- 업체 사양 정보-->
+	<select id="selectOption" parameterType="int" resultType="single">
+			SELECT mno 
+				 , bno
+			     , lno
+			     , name
+			     , product
+			     , price 
+			  FROM laundryinfo
+			 WHERE bno = #{bno};
+	</select>
+	
+	
+	<!-- 업체 리뷰 조회 : 날짜순 -->
+	<select id="reviewList" parameterType="int" resultType="single">
+			SELECT content
+				 , mname
+				 , DATE(rdate) AS rdate
+				 , grade
+			FROM infor_review 
+			WHERE bno = #{bno}
+			ORDER BY rdate DESC;
+	</select>
+	
+	<!-- 업체 리뷰 조회 : 별점순 -->
+	<select id="reviewListGrade" parameterType="int" resultType="single">
+			SELECT content
+				 , mname
+				 , DATE(rdate) AS rdate
+				 , grade
+			FROM infor_review 
+			WHERE bno = #{bno}
+			ORDER BY grade DESC;
+	</select>
+	
+	
+	<!-- 예약 추가-->
+	<insert id="respay" parameterType="maplist">
+		INSERT INTO reservation ( mno
+							    , bno
+								, rdate
+								, ddate
+								, totalprice
+								, payment
+								, stno
+			   						) 
+		       VALUES (   #{mno}
+		     	   		, #{rbno}
+		     	   		, now()
+		     	   		, date_add(now(),INTERVAL #{ddate} day) 
+		     	   		, #{totalPrice}
+		     	   		, "카드"
+		     	   		, DEFAULT
+		      );
+		<foreach collection="resList" item="list">
+				INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) 
+												      FROM reservation 
+												     WHERE mno = #{mno})
+												  , #{list.lno}
+												  , #{list.cnt} 
+												  , 1
+												);
+		</foreach>
+	</insert>
+</mapper>
+

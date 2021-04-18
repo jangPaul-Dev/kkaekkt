@@ -1,0 +1,147 @@
+*:focus {
+    outline: none;
+}
+hr {
+    height: 0.5px;
+    border: none;
+    background-color: var(--gray-color);
+    /* border: solid 0.5px var(—gray-color); */
+    /* width: 95%; */
+  }
+
+.content input {
+    box-sizing: border-box;
+    padding: 15px;
+    width: 200px;
+    height: 40px;
+    margin-top: 10px;
+    border: 1px solid var(--gray-color);
+    border-radius: 10px;
+}
+.content {
+float:left;
+width: 65vw;
+height: 100vh;
+padding: 0px 0px 30px 250px;
+font-size: 16px;
+}
+.content div {
+    padding-top: 20px;
+}
+
+.content #mybio_info {
+    color: var(--text-gray);
+    padding: 0;
+}
+
+.content #mybio_info button {
+    height: 40px;
+    width: 120px;
+    margin-left: 10px;
+    background: var(--gray-color);
+    color:  var(--black-color);
+    border: none;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.content table th {
+    text-align: left;
+}
+
+.content table td {
+    padding-top: 8px;
+    padding-right: 50px;
+}
+#email {
+    box-sizing: border-box;
+    padding: 15px;
+    width: 300px;
+    height: 40px;
+    margin-top: 10px;
+    border: 1px solid var(--gray-color);
+    border-radius: 10px;
+}
+
+#mybio_title {
+    display: inline-block;
+    color: var(--text-gray)
+}
+
+#btn_mybio {
+    background: var(--key-color);
+    border-radius: 30px;
+    border: none;
+    float: right;
+    margin-top: 2vh;
+    margin-right: 10vW;
+    width: 100px;
+    height: 45px;
+    display: block;
+    /* 수정하기 버튼 클릭시 none으로*/
+
+}
+
+#btn_mybioClick {
+    float: right;
+    margin-right: 10vw;
+    display: none;
+    /* 수정하기 버튼 클릭시 inline-block으로*/
+    
+}
+
+#btn_mybiofin, #btn_back {
+    background: var(--key-color);
+    border-radius: 30px;
+    border: none;
+    width: 100px;
+    height: 45px;
+    color: var(--black-color);
+
+}
+#btn_mybiopwd{
+    padding: 0;
+}
+
+#read {
+    border: none;
+}
+
+#mybioPhone input {
+    width: 80px;
+}
+
+#mybioBirth{
+    width: 150px;
+}
+
+#checkval, #checkpwd {
+    color: var(--text-red);
+}
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
+}
+#mailChkDiv {
+    position: relative;
+}
+#timeout{
+    position: absolute;
+    bottom: 7px;
+    left: 170px;
+    top: 36px;
+    font-size: 12px;
+    color: red;
+}
+.mail_check_input{
+    width: 200px;
+}

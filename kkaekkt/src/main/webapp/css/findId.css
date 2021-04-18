@@ -1,0 +1,14 @@
+.id_box span {
+  font-weight: bolder;
+  font-size: x-large;
+  margin-left: 10px;
+  color: black;
+}
+
+.id_box button {
+  margin: 36px 24px;
+}
+
+.id_box {
+  padding: 63px;
+}

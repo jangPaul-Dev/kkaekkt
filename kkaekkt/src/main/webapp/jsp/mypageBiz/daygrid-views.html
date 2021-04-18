@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../lib/main.css' rel='stylesheet' />
+<script src='../lib/main.js'></script>
+<script>
+  var totalPrice;
+  var eventval=[];
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    ajax(pageObj);
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      locale: 'ko',       // 한글로 표기 할 때 
+      customButtons: {
+      prev: {
+      click: function() {
+        calendar.prev();
+        console.log("이전달 클릭");
+        var date = calendar.getDate ();
+        var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
+        var endDt = new Date(date.getFullYear(),  date.getMonth(), date.getDate());
+        console.log(startDt);
+        pageObj = {
+          bno: pageObj["bno"],
+          startDt: startDt,
+          endDt: endDt
+        }
+        ajax(pageObj);
+        if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+        
+        console.log(date);
+      }
+      },
+      next: {
+      click: function() {
+        calendar.next();
+        console.log("다음달 클릭");
+        var date = calendar.getDate ();
+        var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
+        var endDt = new Date(date.getFullYear(),  date.getMonth(), date.getDate());
+        console.log(startDt);
+        pageObj = {
+          bno: pageObj["bno"],
+          startDt: startDt,
+          endDt: endDt
+        }
+        ajax(pageObj);
+        if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+        console.log(date);
+      }
+      },
+      today: {
+      text: 'today',
+      click: function() {
+        calendar.today()
+        console.log("today 클릭");
+        var date = calendar.getDate ();
+        var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
+        var endDt = new Date(date.getFullYear(),  date.getMonth(), date.getDate());
+        console.log(startDt);
+        pageObj = {
+          bno: pageObj["bno"],
+          startDt: startDt,
+          endDt: endDt
+        }
+        ajax(pageObj);
+        if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+        console.log(date);
+      }
+      }
+    },
+      initialView: 'dayGridMonth',
+    });
+      if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+    calendar.setOption('aspectRatio', 1.8);
+    calendar.render();
+    console.log(eventval);
+    
+  });
+  
+
+  function ajax(pageObj){
+  
+  $.post({
+          url: "/selectSales.do",
+          data: pageObj,
+          async:false,
+          success: function (data) {
+            console.log('ajax 함수 완료');
+            let result = JSON.parse(data);
+            console.log(result);
+            inputEvent(result.sales);
+            let inputtotalPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById("inputTotal").innerText = inputtotalPrice +" 원";
+            document.getElementById("inputTotalNum").innerText = result.count +" 건";
+            console.log(eventval);
+           
+          } // success end
+        });  // ajax end
+}
+  function inputEvent(sales){
+    totalPrice = 0;
+    eventval = [];
+    $.each(sales, function (index, item) {
+              let price = item.price;
+              totalPrice = totalPrice+price;
+              let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              if (price <= 100000){
+                eventval.push({
+                title: inputprice + " 원",
+                start: item.rsvDate,
+                color: "var(--text-red)"    // 붉은색
+
+                }); // push end
+              }
+              else if(price > 100000 && price <= 200000 ){
+                eventval.push({
+                title: inputprice + " 원",
+                start: item.rsvDate,
+                color: "var(--text-gray)"   // 연두
+
+                }); // push end
+              } else if(price > 200000){
+                eventval.push({
+                title: inputprice + " 원",
+                start: item.rsvDate,
+                color: "var(--key-text)"    // 푸른색
+
+                }); // push end
+              }
+
+            }); // each end
+        
+  }
+
+</script>
+
+<style>
+
+  body {
+    padding: 0;
+    font-size: 14px;
+  }
+  #wrap{
+    width: 85%;
+  }
+  #monthSales{
+    width: 100%;
+  }
+  #monthtable{
+    margin-top: 25px;
+    font-size: 20px;
+    width: 30%;
+    float: right;
+    text-align: right;
+    padding-right: 100px;
+  }
+  #monthtable tr{
+    padding: 5px;
+  }
+  #calendar {
+    max-width: 50vw;
+    padding-top: 20px;
+    padding-left: 80px;
+    width: 100%;
+    float: left;
+  }
+  #row1{
+    border-bottom: 0.5px solid var(--text-gray);
+  }
+  
+
+</style>
+</head>
+<body>
+  <div id="wrap">
+  <div id='calendar'></div>
+  <div id="monthSales">
+    <table id="monthtable">
+      <tr >
+        <td id="row1">매출</td>
+        <td id="row1">예약</td>
+      </tr>
+      <tr>
+        <td><span id="inputTotal"></span></td>
+        <td><span id="inputTotalNum"></span></td>
+      </tr>
+    </table>
+  </div>
+  </div>
+
+</body>
+</html>

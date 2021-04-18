@@ -1,0 +1,82 @@
+.body_container {
+  /* padding: 200px; */
+  width: 100%;
+  margin: auto;
+}
+.wrapper_find {
+  margin-left: 400px;
+  margin-top: 150px;
+}
+
+/* 아이디 찾기, 비번찾기 */
+.find_nav div {
+  display: inline-block;
+  border-bottom: 4px solid;
+  padding: 0 20px 5px;
+  margin-left: -5px;
+  font-size: 20px;
+  font-weight: bolder;
+  /* color: var(--gray-color); */
+}
+
+input {
+  width: 272px;
+  padding: 12px;
+  border: 0;
+  border: 1px solid var(--gray-color);
+  border-bottom: 1px solid var(--gray-color);
+  border-radius: 5px;
+  margin: 0 0 20px;
+}
+
+button {
+  width: 110px;
+  border: none;
+  border-radius: 38px;
+  padding: 15px;
+  margin-top: 10px;
+  background-color: var(--gray-color);
+}
+
+.next_btn {
+  text-align: center;
+}
+
+p {
+  color: var(--text-gray);
+  line-height: 180%;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.veri_box {
+  width: 800px;
+  height: 260px;
+  box-sizing: border-box;
+  border: solid 1px var(--gray-color);
+  /* border-radius: 10px; */
+  padding: 44px;
+  font-size: 18px;
+  margin: 65px 0 98px;
+  text-align: center;
+  color: var(--text-gray);
+}
+
+.mail {
+  color: var(--text-gray);
+  line-height: 180%;
+  font-size: smaller;
+}
+.mail a {
+  margin-left: 10px;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.unselect {
+  color: var(--gray-color);
+  /* color: black; */
+  /* border: black; */
+}

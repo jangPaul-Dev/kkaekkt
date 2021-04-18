@@ -1,0 +1,73 @@
+
+textarea {
+	resize: none;
+	height: 12em; /* height 안먹는데 이유를 모름.. */
+}
+
+.word {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+}
+
+/* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
+        본인 화면에서 사용할때, position을 정해주셔야 합니다. */
+#modal_container {
+	display: none;
+	position: absolute;
+	top:-700px;
+	left: 400px;	
+	margin: 0 auto;
+	width: 364px;
+	height: 500px;
+	background-color: white;
+	border: 1px solid lightgray;
+	/*box-shadow: 5px 12px 5px rgb(212, 212, 212);*/
+}
+
+
+#modal_close {
+	float: right;
+	width: 36px;
+	height: 36px;
+	border: 1px solid;
+	background: white;
+	margin: 18px 20px 0 0;
+	font-size: 24px;
+	border: none;
+	cursor: pointer;
+}
+
+#modal_bodycont {
+	margin-top: 28px;
+	height: 80%;
+	padding-block: 14px;
+}
+
+#modal_head {
+	width: 80%;
+	height: 80px;
+	text-align: center;
+	margin: 0 auto;
+}
+#modal_head #name{
+    border: none;
+	padding : 0;
+	font-size : 12pt;
+	font-weight :bold;
+}
+#modal_head p{
+	pont-size:11pt;
+}
+
+#modal_foot {
+	margin-top: 230px;
+	margin-left: 17%;
+	/* width: 80%;
+	height: 500px;*/
+}
+#modal_foot input{
+	width : 100px;
+	height: 40px;
+	margin: 10px;
+}

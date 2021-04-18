@@ -1,0 +1,135 @@
+
+.content {
+	width: 530px;
+	text-align: center;
+	margin: auto;
+	padding-top: 30px
+}
+
+
+.login {
+	text-align: center;
+	margin: auto;
+	border: 1px solid;
+	width: 530px;
+	height: 660px;
+}
+
+hr{
+	height: 0.5px;
+	border: none;
+	background-color: #C4C4C4;
+	/* border: solid 0.5px var(--gray-color); */
+	width: 85%;
+}
+
+
+.login_box{
+	margin-left:12%;
+}
+.login_box input {
+	border: solid 1px #C4C4C4;
+	width: 82%;
+	height: 54px;
+	margin-bottom: 21px;
+	border-radius: 20px;
+}
+
+.content button {
+	float: left;
+	position: relative;
+	/* left:250px; */
+	top: -50px;
+}
+
+.loginTitle {
+	text-align: center;
+	margin-bottom: 60px;
+}
+.login_API{
+	margin-left:28%;
+}
+.login_API img {
+	width: 80px;
+	/* position: relative;
+	left: 80px; */
+}
+.login_foot {
+}
+.login_foot p {
+	margin: 0;
+	padding: 0;
+	font-size: 9pt;
+	color: #BCBCBC;
+	/* position: relative;
+    left: 33%; */
+	margin-top: 30px;
+	text-align: center;
+}
+
+.finds {
+	/* position: relative;
+	left: 13%; */
+	margin-left: 17%;
+	color: var(--dark-gray);
+}
+
+.finds a {
+	margin: 30px;
+}
+
+.the_others p {
+	/* position: relative;
+    left: 33%; */
+	text-align: center;
+}
+
+/* ëª¨ë‹¬ ì˜ì—­ */
+.word {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+}
+
+#modal_container {
+	display: none;
+	position: relative;
+	margin: 0 auto;
+	width: 450px;
+	height: 650px;
+	background-color: white;
+	border: 1px solid lightgray;
+	z-index:31;
+	/* 	box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+}
+
+#modal_close {
+	float: right;
+	width: 36px;
+	height: 36px;
+	background: white;
+	margin: 18px 20px 0 0;
+	font-size: 24px;
+	border: none;
+	cursor: pointer;
+}
+
+#modal_bodycont {
+	margin-top: 28px;
+    height: 80%;
+    padding-block: 14px;
+}
+
+#modal_head {
+	width: 80%;
+	height: 80px;
+	text-align: center;
+	color: var(--dark-gray);
+	margin: 0 auto;
+}
+
+/* #modal_foot {
+	margin: 0px 15%;
+	width: 80%;
+	height: 315px;
+} */

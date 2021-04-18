@@ -1,0 +1,148 @@
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="/css/mypageBs_ing.css">
+<link rel="stylesheet" href="/css/all.css">
+<link rel="stylesheet" href="/css/head0.css">
+<link rel="stylesheet" href="/css/sidebar.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+
+<body>
+	<header class="head_container">
+        <nav class="head">
+            <div class="head_left">
+                <div class="logo">
+                    <a href="">
+                        <img src="/img/logo.svg" alt="">
+                    </a>
+                </div>
+                <div class="menu">
+                    <a href="">일반세탁소</a>
+                    <a href="">코인세탁소</a>
+                </div>
+            </div>
+            <div class="head_right">
+                <a href="">회원가입</a>
+                <a href="">로그인</a>
+                <a href="">FAQ</a>
+            </div>
+        </nav>
+    </header>
+	<div class="body_container">
+		<div class="my_container">
+			<div class="side">
+				<button>처리중</button>
+				<button>완 료</button>
+				<button>매출관리</button>
+			</div>
+			<div class="side_sub">
+				<button>품목별</button>
+				<button>주문번호별</button>
+			</div>
+			<div class="content">
+				<ul class="laundry_nav">
+					<li>전체보기</li>
+					<li>일반의류</li>
+					<li>와이셔츠</li>
+					<li>이불</li>
+					<li>운동화</li>
+					<li>가죽모피</li>
+					<li>명품가방</li>
+					<li>아웃도어</li>
+					<li>기타</li>
+				</ul>
+				<div class="content_header">
+					<p>전체 개수 : 1,403 개</p>
+					<div class="searchBox">
+						<div class="dayCheck">
+							<input type="checkbox" value=3 onclick=""> 3일 이내
+							<input type="checkbox" value=7> 7일 이내
+						</div>
+						<select>
+							<option value="1">이름</option>
+							<option value="2">주문번호</option>
+						</select>
+						<i class="fas fa-search"></i>
+						<input type="text" class="search">
+					</div>
+				</div>
+				<hr>
+				<div class="process">
+					<p>오늘 주문</p>
+					<table class="processHeader">
+						<tr>
+							<th>주문일</th>
+							<th>주문번호</th>
+							<th>주문자</th>
+							<th>상품명</th>
+							<th>개수</th>
+							<th>남은일자</th>
+							<th>작업처리</th>
+						</tr>
+					</table>
+					<table class="processList">
+						<tr>
+							<td>2021-01-22</td>
+							<td>992810</td>
+							<td>홍길동</td>
+							<td>와이셔츠</td>
+							<td>1</td>
+							<td>D-1</td>
+							<td><div><div>취소</div><div>완료</div></div></td>
+						</tr>
+					</table>
+					<p>지난 주문</p>
+					<table class="processList">
+						<tr>
+							<td>2021-01-22</td>
+							<td>992810</td>
+							<td>홍길동</td>
+							<td>와이셔츠<br>가죽모피<br>기타</td>
+							<td>1<br>2<br>2</td>
+							<td>D-2</td>
+							<td><div>품목취소</div><div>작업완료</div></td>
+						</tr>
+					</table>
+					<table class="processList">
+						<tr>
+							<td>2021-01-22</td>
+							<td>992810</td>
+							<td>홍길동</td>
+							<td>와이셔츠<br>가죽모피<br>기타</td>
+							<td>1<br>2<br>2</td>
+							<td>D-3</td>
+							<td><div>품목취소</div><div>작업완료</div></td>
+						</tr>
+					</table>
+				</div>
+				<div class="page_btn_container">
+					<ul class="page_btn">
+						<!-- 맨처음으로 버튼 -->
+						<li class="page_prevBlock"><i class="fas fa-angle-double-left"></i></li> 
+						<!-- 이전 -->
+						<li class="page_prev">
+							<i class="fas fa-angle-left"></i>
+						</li>
+						<!-- 다음버튼 -->
+						<li class="page_next">
+							<i class="fas fa-angle-right"></i>
+						</li>
+						<!-- 맨마지막으로 버튼 -->
+						<li class="page_nextBlock"><i class="fas fa-angle-double-right"></i></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
+		crossorigin="anonymous"></script>
+	<script>
+		var temp;
+		temp+='dd';
+		console.log(temp);
+	</script>
+</body>
+</html>

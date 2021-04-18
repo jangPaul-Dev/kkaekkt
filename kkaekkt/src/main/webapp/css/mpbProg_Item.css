@@ -1,0 +1,335 @@
+select,
+button {
+  cursor: pointer;
+}
+/* .content {
+    float:left;
+    width: 65vw;
+    height: 100vh;
+    padding: 20px 70px;
+} */
+.content_header {
+  display: flex;
+}
+.content_header p {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 auto 0 10px;
+}
+.content_header span {
+  color: var(--key-text);
+}
+.content hr {
+  border: none;
+  background: var(--gray-color);
+  height: 1px;
+  margin-bottom: 30px;
+}
+.content .laundry_nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding: 0 10px;
+}
+.laundry_nav li {
+  color: gray;
+  cursor: pointer;
+}
+.selected {
+  color: black !important;
+  font-weight: bold;
+}
+
+.content_header .searchBox {
+  position: relative;
+  margin: 0 0 0 auto;
+  width: 200px;
+  height: 30px;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid var(--gray-color);
+  background-color: white;
+}
+.searchBox .search {
+  right: 33px;
+  position: absolute;
+  width: 52%;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background-color: white;
+}
+.searchBox i {
+  position: absolute;
+  top: 7px;
+  right: 13px;
+  cursor: pointer;
+}
+.searchBox select {
+  position: absolute;
+  border: 0px;
+  appearance: none;
+  outline: none;
+  border-radius: 20px;
+  top: 8px;
+  left: 8px;
+  /* color: #6D6D6D; */
+  text-align-last: center;
+  background-color: white;
+}
+.order {
+  display: flex;
+  margin-bottom: 20px;
+}
+.order p {
+  margin: 0 auto 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.processTitle {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.processHeader {
+  width: 100%;
+  border: 1px solid var(--gray-color);
+}
+.processHeader tr th {
+  width: 14%;
+  border: none;
+  padding: 10px 0;
+}
+.processList {
+  width: 100%;
+  border: 1px solid var(--gray-color);
+  text-align: center;
+  margin-bottom: 5px;
+  min-height: 85px;
+  margin-top: -1px;
+}
+.processList tr {
+  position: relative;
+}
+.processList tr td {
+  padding: 10px 0;
+  width: 14%;
+  border: none;
+}
+.processList tr td:nth-child(7) {
+  position: relative;
+}
+.processList tr td:nth-child(7) div {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 60%;
+  height: 75px;
+  color: black;
+}
+.processList tr td:nth-child(7) div:nth-child(1) button:nth-child(1) {
+  position: relative;
+  background: rgb(251, 135, 135);
+  margin-bottom: 5px;
+  width: 95%;
+  border: none;
+  font-size: 1rem;
+  border-radius: 30px;
+  height: 35px;
+}
+.processList tr td:nth-child(7) div:nth-child(1) button:nth-child(2) {
+  position: relative;
+  background: var(--key-color);
+  width: 95%;
+  border: none;
+  font-size: 1rem;
+  border-radius: 30px;
+  height: 35px;
+}
+
+.page_btn button {
+  width: 30px;
+  margin: -2px;
+}
+
+.page_btn_container {
+  position: relative;
+  text-align: center;
+}
+
+.page_btn {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.page_btn li {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  list-style: none;
+  float: left;
+  /* width: 40px; */
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 13px;
+  margin-left: -1px;
+  cursor: pointer;
+}
+.page_btn li.curPage {
+  background: var(--gray-color);
+}
+.page_prevBlock {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.page_nextBlock {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.selectbox {
+  position: relative;
+  width: 123px; /* 너비설정 */
+  border: 1px solid #999; /* 테두리 설정 */
+  z-index: 1;
+  height: 30px;
+  border-radius: 30px;
+}
+/* 가상 선택자를 활용 화살표 대체 */
+.selectbox:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  width: 0;
+  height: 0;
+  margin-top: -1px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+}
+.selectbox label {
+  position: absolute;
+  top: -9px; /* 위치정렬 */
+  left: 1px; /* 위치정렬 */
+  padding: 0.8em 0.5em; /* select의 여백 크기 만큼 */
+  color: #999;
+  z-index: -1; /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+}
+.selectbox select {
+  width: 100%;
+  height: auto; /* 높이 초기화 */
+  line-height: normal; /* line-height 초기화 */
+  font-family: inherit; /* 폰트 상속 */
+  padding: 0.4em 0.5em; /* 여백과 높이 결정 */
+  border: 0;
+  opacity: 0; /* 숨기기 */
+  filter: alpha(opacity=0); /* IE8 숨기기 */
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+}
+#modal_container {
+  display: none;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 364px;
+  height: 225px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  /* box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+  z-index: 1000;
+}
+#modal_close {
+  float: right;
+  width: 36px;
+  height: 36px;
+  border: 1px solid;
+  background: white;
+  margin: 18px 20px 0 0;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+#modal_foot {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+#modal_foot p {
+  font-size: 20px;
+  font-weight: bold;
+}
+#review_btn button {
+  margin: 15px 20px;
+  border: none;
+  width: 96px;
+  height: 45px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+#review_btn button:hover {
+  background: rgba(143, 188, 255, 0.48);
+}
+#modal_userInfo {
+  display: none;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 400px;
+  height: 415px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  /* box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+  z-index: 1000;
+}
+#userInfo_bodycont {
+  clear: both;
+  margin: 20px 45px 0 45px;
+  height: 170px;
+}
+#modal_userInfo hr {
+  height: 1px;
+  width: 80%;
+  background-color: var(--gray-color);
+}
+#modal_userInfo h2 {
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 14px;
+  color: var(--text-gray);
+}
+#userInfo_bodycont tr {
+  margin-top: 5px;
+  padding: 5px;
+  height: 32px;
+}
+#userInfo_bodycont th {
+  width: 82px;
+  text-align: left;
+  vertical-align: initial;
+  color: var(--text-gray);
+}
+
+.btn_info {
+  background: none;
+  border: none;
+  font-size: 16px;
+}
+.btn_info:hover {
+  font-weight: bold;
+}

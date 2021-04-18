@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
+    <title>Document</title>
+</head>
+<style>
+    p{
+        margin: 0;
+    }
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .box{
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+    }
+    .chatCont{
+        /* display: none; */
+        float: right;
+        margin: 14% 6% 0 0;
+        width: 20vw;
+        height: 30vh;
+        background-color: white;
+        border: 1px solid lightgray;
+        border-radius: 20px;
+        box-shadow: lightgrey 0px 0px 15px 3px;
+        margin-top: 20px;       
+    }
+    .chatHeader{
+        width: 95%;
+        height: 38px;
+        margin: 20px auto 5px;
+        box-shadow: 0px 1px 0px 0px lightgrey;
+    }
+    .chatHeader p {
+        text-align: left;
+        margin-left: 30px;
+        font-weight: 500;
+        font-size: 18px;
+        color: rgb(73,135,255);;
+    }
+
+    .chatList{
+        list-style: none;
+        width: 75%;
+        height: 50px;
+        margin: 15px 10px 0;
+        padding: 0 23px 0 23px;
+        padding-block-start: 15px;
+        border: 1px solid lightgray;
+        border-radius: 20px;
+    }
+
+    .chatList:hover{
+        background-color: rgb(235, 235, 235);
+    }
+
+    .chatList li{
+        display: inline-block;
+        height: 65px;
+    }
+   
+    .chatList li:nth-child(1){
+        margin-left: 10px;
+        float: left;
+        width: 55%;
+    }
+    .chatList li:nth-child(1) p:nth-child(1){
+        font-size: 14px;
+        font-weight: bolder;
+        width: 200px;
+    }
+
+    .chatList li:nth-child(1) p:nth-child(2){
+        font-size: 12px;
+        width: 130px;
+        height: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .chatList li:nth-child(2){
+        float: right;
+    }
+
+    /* 나가기 버튼 */
+    .chatBtn{
+        width: 60px;
+        height: 30px;
+        float: right;
+        border: none;
+        border-radius: 20px;
+        background-color: rgb(235, 235, 235);
+        font-weight: 800;
+        color: rgb(73,135,255);
+        margin: 0% 0% 30%;
+    }
+
+    .chatBtn:hover{
+        background-color: rgb(73,135,255);
+        color: rgb(248, 248, 248);
+    }
+
+    .chatfooter{
+        margin: 0 auto;
+        width: 90%;
+        height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    /* 챗팅 */
+    .chatSingle{
+        border: 1px solid lightgrey;
+        position: absolute;
+        float: right;
+        margin: 19% 6% 0 74%;
+        width: 345px;
+        height: 620px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: -2px 0px 8px 1px lightgrey;
+    }
+
+    .chatSingleHead{
+        width: 100%;
+        height: 35px;
+        border-radius: 20px;
+        padding: 20px 0 0 0;
+    }
+
+    .chatSingleHead p{
+        margin-top: 10px;
+        margin-left: 30px;
+        font-size: 18px;
+        display: inline;
+    }
+    .chatSingleHead button{
+        margin-top: -10px;
+        margin-right: 25px;
+        width: 30px;
+        height: 30px;
+        border: 0px;
+        font-size: 25px;
+        color: rgb(73,135,255);
+        background-color: white;
+        float: right;
+        display: inline;
+    }
+
+    .chatSingleBody{
+        width: 100%;
+        height: 80%;
+    }
+
+    .chatBodyCont{
+        width: 100%;
+        height: auto;
+        overflow-y: scroll;
+    }
+    .chatBodyCont li{
+        margin: 3% 6%;
+    }
+
+    .bubble{
+        width: 71%;
+        height: auto;
+        font-size: 14px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        padding: 8px 27px;
+    }
+
+    .chatTime{
+        font-size: 12px;
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+
+    .chatMe{
+        height: 60px;
+        float: right;
+        width: 45%;
+    }
+    .me{
+        background-color: rgb(73,135,255);
+        border-bottom-left-radius: 10px;
+        color: white;
+    }
+    .chatGuest{
+        height: 80px;
+        width: 45%;
+        float: left;
+    }
+   .guest{
+        background-color: rgb(235, 235, 235);
+        text-align: left;
+        border-bottom-right-radius: 10px;
+   }
+    .guestId{
+        font-size: 12px;
+        margin-left: 10px;
+        width: 50%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        float: left;
+    }
+
+    .chatText{
+        margin: 20px auto;
+        width: 70%;
+        border: 0px;
+        padding: 10px 10px 0;
+        margin-left: 10px;
+        height: 40px;
+        overflow-y: scroll;
+    }
+
+    #writePost{
+        width: 50px;
+        height: 25px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 20px;
+        font-weight: 800;
+        color: rgb(73,135,255);
+        background-color: rgb(73,135,255);
+        color: white;
+        float: right;
+        margin: 35px 10px;  
+    }
+
+
+</style>
+<script>
+    $( document ).ready(function() {
+        $(".chatList").on('click', 'li' ,function () {
+            $(".chatCont").hide()
+            $(".chatSingle").show()
+        })
+
+        $(".chatBtn").on('click',function () {
+            alert("버튼")
+        })
+       
+        $("#chatSingleClose").on('click',function () {
+            $(".chatSingle").hide()
+        })
+    })
+</script>
+<body>
+    <div class="box">
+        <div class="chatCont">
+            <div class="chatHeader">
+                    <p>💬 채팅상담</p>
+            </div>
+            <div class="chatfooter">
+                <ul class="chatList">
+                        <li>
+                            <p>게스트</p>
+                            <p>글씨가 넘어가면 어떻게되지요?</p>
+                        </li>
+                        <li>
+                            <button class="chatBtn">나가기</button>
+                        </li>
+                </ul>
+            </div>
+        </div>
+        <ul class="chatContainer">
+            <li class="chatBox" id="10room102">
+                <div class="chatBoxHeader">
+                    💬<span>테스트업체</span>
+                    <i class="fas fa-times closeChatBtn"></i>
+                </div>
+                <ul class="chatRogUl">
+                </ul>
+                <div class="chatInputBox">
+                    <textarea class="chatText"placeholder="대화를 입력하세요"></textarea><button class="chatWriteBtn">전송</button>
+                </div>
+            </li>
+            <li class="chatBox">
+                <div class="chatBoxHeader">
+                    💬<span>테스트업체</span>
+                    <i class="fas fa-times closeChatBtn"></i>
+                </div>
+                <ul class="chatRogUl">
+                    <li class="chatRogli chatRight">
+                        <p class="chatRogP chatMine">여유가 많이 있어야 하는데 매번 마진과 패딩이 부족하다고 한다. 나는 여유가 많이 부족한 인간이다. 항상 패딩과 마진을 많이 남겨놓자</p>
+                        <p class="timeRog">오후 23:21</p>
+                    </li>
+                    <li class="chatRogli chatLeft">
+                        <p class="chatRogP chatGuest">허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허허</p>
+                        <p class="timeRog">오후 23:21</p>
+                    </li>
+                    <li class="chatRogli chatLeft">
+                        <p class="chatRogP chatGuest">sadsddddddddddddsadasdddddddddddddddddddddddddddddddddddddsadasdad</p>
+                        <p class="timeRog">오후 23:21</p>
+                    </li>
+                    <li class="chatRogli chatLeft">
+                        <p class="chatRogP chatGuest">sadsddddddddddddsadasdddddddddddddddddddddddddddddddddddddsadasdad</p>
+                        <p class="timeRog">오후 23:21</p>
+                    </li>
+                    <li class="chatRogli chatLeft">
+                        <p class="chatRogP chatGuest">sadsddddddddddddsadasdddddddddddddddddddddddddddddddddddddsadasdad</p>
+                        <p class="timeRog">오후 23:21</p>
+                    </li>
+                    <li><button>나가기</button></li>
+            </ul>
+                <ul class="chatList">
+                    <li><p>게스트</p><p>챗팅내용 표기될부분</p></li>
+                    <li><button>나가기</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="chatSingle">
+            <div class="chatSingleHead">
+                <p>
+                    💬게스트
+                </p>
+                <button id="chatSingleClose"> x </button>
+            </div>
+            <div class="chatSingleBody">
+                <ul class="chatBodyCont">
+                    <li class="chatMe">
+                        <p class="me bubble">내 말풍선</p>
+                        <p class="chatTime">04/14/4:14</p>  
+                    </li>
+                    <li class="chatGuest">                    
+                        <p class="guest bubble">내가 말을 이렇게 길게하면 어떻게되니?                            
+                        </p>
+                        <p class="guestId">게스트다이자식들아아아아아아아아<p class="chatTime">04/14/4:14</p>  </p>   
+                    </li>
+                    <li class="chatMe">
+                        <p class="me bubble">내 말풍선</p>
+                        <p class="chatTime">04/14/4:14</p>  
+                    </li>
+                    <li class="chatGuest">                    
+                        <p class="guest bubble">내가 말을 이렇게 길게하면 어떻게되니?                            
+                        </p>
+                        <p class="guestId">게스트다이자식들아아아아아아아아<p class="chatTime">04/14/4:14</p>  </p>   
+                    </li>
+                    <li class="chatGuest">                    
+                        <p class="guest bubble">내가 말을 이렇게 길게게스트다이자식들아아아아아아아아하면게스트다이자식들아아아아아아아아 어떻게되니?게스트다이자식들아아아아아아아아                            
+                        </p>
+                        <p class="guestId">게스트다이자식들아아아아아아아아<p class="chatTime">04/14/4:14</p>  </p>   
+                    </li>
+                </ul>
+                <div>
+                    <textarea class="chatText"placeholder="대화를 입력하세요"></textarea><button id="writePost">전송</button>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</html>

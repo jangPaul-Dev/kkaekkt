@@ -1,0 +1,58 @@
+.confirmBox {
+  padding-top: 100px;
+  height: 500px;
+}
+
+.confirmBox img {
+  position: relative;
+  width: 500px;
+}
+
+.imgBox {
+  text-align: center;
+  height: 300px;
+  position: relative;
+}
+
+.textBox {
+  /* position: absolute; */
+  position: relative;
+  top: -220px;
+  z-index: 1000;
+}
+.textBox h1 {
+  margin-bottom: 195px;
+}
+.confirmBox p span {
+  font-size: larger;
+  /* font-weight: bolder; */
+  color: rgb(245, 88, 101);
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  margin: 15px;
+  font-size: medium;
+}
+
+button:hover {
+  background-color: var(--gray-color);
+}
+
+.confirmBox p {
+  line-height: 200%;
+  /* font-size: 20px; */
+}
+
+.login_btn:hover {
+  background-color: var(--key-color);
+}
+
+.wrapper_select {
+  height: 1000px;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        textarea{
+            resize: none;
+            height: 12em;/* height 안먹는데 이유를 모름.. */
+        }
+        .word{
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+        }
+
+        /* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
+        본인 화면에서 사용할때, position을 정해주셔야 합니다. */
+       #modal_container{
+            display: none;
+
+            position: relative;
+            margin: auto;
+            width: 364px;
+            height: 550px;
+            background-color: white;
+            border: 1px solid lightgray;
+            box-shadow: 5px 12px 5px rgb(212, 212, 212);
+       }
+
+       #starVal{
+            float: left;
+            margin-left: 21px;
+            font-size: 36px;
+            width: 28px;
+            height: 44px;
+            border: 0px;
+            background: none;
+            text-align: center;
+            color: rgba(97, 97, 97, 1);
+            font-family: Noto Sans KR;
+            font-style: normal;
+            font-weight: bold;
+       }
+
+       #modal_close{
+            float: right;
+            width: 36px;
+            height: 36px;
+            border: 1px solid;
+            background: white;
+            margin: 18px 20px 0 0;
+            font-size: 24px;
+            border: 1px solid lightgray;
+       }
+
+       #modal_bodycont{
+            margin-top: 28px;
+            height: 80%;
+            padding-block: 14px;
+       }
+
+       #modal_head{
+            width: 80%;
+            height: 80px;
+            text-align: center;
+            margin: 0 auto;
+       }
+
+       #modal_foot{
+            margin: 20px auto;
+            width: 80%;
+            height: 315px;
+       }
+
+       #review_text{
+           width: 100%;
+           background-color:rgba(249, 249, 249, 1);
+           border-radius: 4px;
+           border: 1px solid lightgray;
+       }
+
+       #review_texter{
+            float: right;
+            font-size: 15px;
+            color: lightgray;
+       }
+
+       #sub_review{
+            background: rgba(143, 188, 255, 0.48);
+            border-radius: 30px;
+            border: 0px;
+            width: 120px;
+            height: 40px;
+            margin: 28px 89px;
+       }
+
+       /* 별 css */
+       /* rating */
+        .rating-group { display: inline-flex; float: right; margin-right: 23px;}
+        .rating__icon { pointer-events: none; }
+        .rating__input { position: absolute !important; left: -9999px !important; }
+        .rating__label { cursor: pointer; padding: 0 0.1em; font-size: 2rem; }
+        .rating__icon--star { color: yellow; }
+        .rating__icon--none { color: #eee; }
+        .rating__input:checked ~ .rating__label .rating__icon--star { color: #ddd; }
+        .rating-group:hover .rating__label .rating__icon--star { color: yellow; }
+        .rating__input:hover ~ .rating__label .rating__icon--star { color: #ddd; }
+        .rating-group:hover .rating__input--none:not(:hover )+.rating__label .rating__icon--none{ color: #eee; }
+    </style>
+    <script>
+        $(document).ready(function(){
+        
+
+            /* button click event */
+            /* 모달 생성 */
+            $("#modal_show").click(function(){ $("#modal_container").show() })
+            $("#modal_close").click(function(){ $("#modal_container").hide() })
+
+            /* 평점 받기 */
+            $(".rating__input").click(function(){ var starVal = $(this).attr('value'); $("#starVal").val(starVal) })    
+            /* 리뷰 받기 */
+            $('#review_text').keyup(function (e){ 
+                var review_text = $(this).val(); 
+                $('#review_texter').html(review_text.length + '/300') })
+            $('#review_text').keyup();
+
+        })
+    </script>
+</head>
+<body>
+    <div class="word">
+        <button id="modal_show"> 모달 띄우기</button>
+
+        <div id="modal_container">
+            <button id="modal_close">x</button>
+            <div id="modal_bodycont">
+                <form>
+                    <div id="modal_head">
+                        <p>이용에 만족하시나요?</p>
+                    
+                            <input id="starVal" value="1">
+                            <div class="rating-group" value="">
+                                <label aria-label="1 star" class="rating__label" for="rating-1">
+                                <i class="rating__icon rating__icon--star fa fa-star"></i></label> 
+                                <input class="rating__input" name="rating" id="rating-1" value="1" type="radio" checked> 
+                    
+                                <label aria-label="2 stars"   class="rating__label" for="rating-2">
+                                <i   class="rating__icon rating__icon--star fa fa-star"></i></label>             
+                                <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
+                    
+                                <label aria-label="3 stars" class="rating__label" for="rating-3">
+                                    <i class="rating__icon rating__icon--star fa fa-star"></i></label> 
+                                <input class="rating__input" name="rating" id="rating-3" value="3" type="radio">
+                    
+                                <label aria-label="4 stars" class="rating__label" for="rating-4">
+                                    <i class="rating__icon rating__icon--star fa fa-star"></i></label>            
+                                <input class="rating__input" name="rating" id="rating-4" value="4" type="radio" >
+                                
+                                <label aria-label="5 stars" class="rating__label" for="rating-5">
+                                    <i class="rating__icon rating__icon--star fa fa-star"></i></label>                
+                                <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+                            </div>                
+                    </div>
+                    <hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
+                    <div id="modal_foot">
+                        <p style="text-align: center;">어떤 점이 좋았나요?</p>
+                        <textarea id="review_text" maxlength="300"  placeholder="최소 10자 이상 입력해주세요."></textarea> 
+                        <span id="review_texter">###</span><br>
+                        <button id="sub_review" type="submit"> 리뷰쓰기</button>                     
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

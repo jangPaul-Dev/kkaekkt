@@ -1,0 +1,104 @@
+.join_form {
+  display: block;
+  width: 430px;
+  height: 1500px;
+  margin: auto;
+  text-align: left;
+}
+
+h3 {
+  text-align: center;
+  margin: 10%;
+  margin-bottom: 15%;
+}
+
+form div {
+  margin-bottom: 20px;
+}
+
+form div input {
+  box-sizing: border-box;
+  margin: 10px;
+  /* margin-bottom: 20px; */
+  width: 300px;
+  height: 50px;
+  padding: 15px;
+  background: #ffffff;
+  /* border: 1px solid #616161; */
+  border: none;
+  border-radius: 10px;
+}
+
+form div p {
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+form div button {
+  /* margin: 10px; */
+  width: 106px;
+  height: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+}
+
+form div button:hover {
+  background-color: var(--gray-color);
+}
+.join_btn {
+  width: 100%;
+  padding: 30px 0 50px;
+  text-align: center;
+}
+
+.join_btn button {
+  border-radius: 30px;
+  width: 120px;
+  margin: 15px;
+  font-size: medium;
+}
+
+.wrapper_select {
+  height: 2000px;
+}
+
+/* #postcode {
+  width: 150px;
+} */
+#roadAddress {
+  width: 417px;
+}
+#detailAddress {
+  width: 178px;
+}
+#extraAddress {
+  width: 225px;
+  margin: 3px 0 0px;
+}
+
+/* .phoneBox input {
+  width: 90px;
+} */
+
+label {
+  font-size: smaller;
+  color: var(--text-red);
+  margin-left: 10px;
+}
+
+#mailChkDiv {
+  position: relative;
+}
+#timeout {
+  font-size: smaller;
+  position: absolute;
+  bottom: 7px;
+  right: 137px;
+  top: 25px;
+  color: var(--text-red);
+}
+
+#mail_check_input_box_false {
+  background-color: var(--gray-color);
+}

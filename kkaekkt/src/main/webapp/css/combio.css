@@ -1,0 +1,225 @@
+*:focus {
+    outline: none;
+}
+hr {
+    height: 0.5px;
+    border: none;
+    background-color: var(--gray-color);
+    /* border: solid 0.5px var(—gray-color); */
+    /* width: 95%; */
+    width: 100%;
+    margin-bottom: 10px;
+}
+.content input {
+    box-sizing: border-box;
+    padding: 15px;
+    width: 200px;
+    height: 40px;
+    margin-top: 13px;
+    border: 1px solid var(--gray-color);
+    border-radius: 10px;
+}
+.content {
+    float:left;
+    width: 60vw;
+    height: 100vh;
+    padding: 0px 0px 0px 250px;
+    font-size: 16px;
+}
+.content div {
+    padding-bottom: 7px;
+}
+#combio_title li{
+    float: left;
+    list-style: none;
+    padding-bottom: 10px;
+}
+#combio_title #title_right{
+    /* margin-left: 720px; */
+    float: right;
+
+}
+#combio_title #bname{
+    font-size: 22px;
+}
+
+#likeNum, #avglike{
+    font-size: 16px;
+    font-weight: bold;
+}
+.yellow{
+    font-size: 16px;
+    color: yellow;
+}
+.gray{
+    font-size: 16px;
+    color: var(--gray-color);
+}
+.bizinfo table td {
+    padding: 0px 180px 0px 10px;
+}
+.content input {
+    width: 200px;
+    height: 40px;
+    margin-top: 12px;
+}
+select {
+    width: 80px;
+    height: 40px;
+    padding: 0em .5em;
+    background:
+        url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+        no-repeat 95% 50%;
+    background-size: 40%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid var(--gray-color);
+    border-radius: 10px;
+    color: var(--text-gray);
+}
+
+select::-ms-expand { /* for IE 11 */
+    display: none;
+    color: var(--text-gray);
+}
+.content button {
+    height: 40px;
+    width: 120px;
+    margin-left: 12px;
+    background: var(--gray-color);
+    border: none;
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 30px;
+}
+.bizMemberInfo  table{
+    padding-top: 0;
+    text-align: left;
+}
+.bizMemberInfo table th {
+    color: var(--text-gray);
+    padding: 10px;
+    
+}
+
+.bizMemberInfo table tr {
+    padding: 10px;
+}
+
+.bizMemberInfo table td {
+    padding: 0 10px 0 10px;
+    color: var(--text-gray);
+    
+}
+.bizInfo {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.bizMemberInfo{
+    margin-left: 10px;
+}
+.bioleft {
+    float: left;
+    width: 30vw;
+    height: 22vh;
+    margin: 0;
+}
+.bioleft input[name='id']{
+    border:none;
+}
+.bioright{
+    height: 22vh;
+    padding-top: 20px;
+    
+}
+#btn_combiopwd{
+    padding: 0;
+}
+#read {
+    border: none;
+}
+
+#combioPhone input {
+    width: 80px;
+    padding-left: 10px;
+}
+#mailChkDiv {
+    position: relative;
+}
+#timeout{
+    position: absolute;
+    bottom: 7px;
+    left: 150px;
+    top: 17px;
+    font-size: 12px;
+    color: red;
+}
+.mail_check_input{
+    width: 200px;
+}
+#combioAddress{
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+#checkval, #checkpwd {
+    color: var(--text-red);
+}
+#btn_address{
+    color: var(--text-gray);
+}
+#btn_update {
+    display: inline-block;
+    
+}
+#btn_update button {
+    background: var(--key-color);
+    border-radius: 30px;
+    border: none;
+    margin-top: 2vh;
+    margin-right: 1vW;
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    color: var(--text-gray);
+}
+#btn_change {
+    margin-left: 21vw;
+}
+
+#resetBio, #submitBio {
+    width: 100px;
+    height: 40px;
+}
+
+#updateBio {
+    margin-left: 26vw;
+    width: 100px;
+    height: 40px;
+}
+#bankAccNum{
+    width: 250px;
+}
+#phone1, #phone2, #phone3 {
+    width: 80px;
+}
+#email {
+    width: 280px;
+}
+.mail_check_input{
+    width: 180px;
+}
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
+}

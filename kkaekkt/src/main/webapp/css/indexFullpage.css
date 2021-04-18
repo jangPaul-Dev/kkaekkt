@@ -1,0 +1,164 @@
+body,
+html {
+  padding: 0px;
+  margin: 0px;
+  color: white;
+}
+
+video {
+  /* width: 100vw; */
+  top: 0;
+  position: fixed;
+  height: 100vh;
+}
+
+.search {
+  position: absolute;
+  top: 10px;
+  z-index: 1000;
+  left: 100px;
+  margin-top: 100px;
+}
+.index0 {
+  /* width: 100%; */
+  /* height: 500px; */
+  overflow: hidden;
+  /* margin: 0px auto; */
+  position: relative;
+}
+
+.index1 {
+  background-image: url(/img/laundry7.jpeg);
+  background-size: cover;
+}
+.index2 {
+  background-image: url(/img/laundry6.jpeg);
+  background-size: cover;
+}
+.index3 {
+  background-image: url(/img/laundry2.jpeg);
+  background-size: cover;
+}
+
+.index4 {
+  background-image: url(/img/laundry1.jpeg);
+  background-size: cover;
+}
+
+.head_container {
+  background: none;
+  color: white;
+}
+.head_container a {
+  color: white;
+}
+/* .head_right ul li {
+  float: left;
+  margin-left: 36px;
+} */
+/* 로그인 아이디/비번찾기 */
+.finds a{
+  color: var(--black-color);
+}
+/* .head {
+  padding: 15px 50px;
+} */
+
+/* .logo img {
+  width: 200px;
+  padding: 10px;
+} */
+.menu ul li {
+  margin-right: 58px;
+}
+
+.search_box {
+  position: absolute;
+  text-align: right;
+}
+.search_box button {
+  position: absolute;
+  top: 26px;
+  right: 18px;
+}
+
+.search_btn button {
+  /* border-bottom: 5px solid white; */
+  /* border-bottom: 7px dotted white; */
+  border: 4px solid white;
+  border-radius: 100px;
+  padding: 16px;
+  font-weight: bold;
+  margin: 0 20px 20px 0px;
+  font-size: 22px;
+}
+
+.search_btn button:hover {
+  border: 4px solid white;
+  color: var(--black-color);
+  background-color: white;
+}
+
+.btn_selected {
+  /* border: 4px solid white; */
+  color: var(--black-color);
+  /* color: var(--key-text); */
+  background-color: white;
+}
+.search_tab {
+  margin: 80px 0px 10px;
+  /* margin: 80px 60px 10px; */
+}
+
+.search_box input {
+  width: 370px;
+  padding: 25px;
+  background-color: rgb(255, 255, 255, 0.3);
+  border: 4px solid white;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: var(--black-color);
+  /* color: var(--key-text); */
+}
+
+.search_box input::placeholder {
+  color: white;
+}
+
+.text {
+  margin-left: 100px;
+}
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
+}
+
+h1 {
+  font-size: 62px;
+}
+
+#fp-nav ul li a span {
+  background-color: white;
+}
+
+/* .text h1 {
+  transition: 0.5ms;
+} */
+.text span {
+  color: var(--key-text);
+}
+
+.index1 .text {
+  margin-bottom: 100px;
+}
+.index2 .text {
+  text-align: right;
+  margin-right: 270px;
+}
+.index4 .text {
+  margin-bottom: 250px;
+}

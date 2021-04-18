@@ -1,0 +1,77 @@
+#mailChkDiv {
+  position: relative;
+  margin-top: 24px;
+}
+#timeout {
+  font-size: smaller;
+  position: absolute;
+  top: 9px;
+  right: 220px;
+  font-weight: 500;
+  color: var(--text-red);
+}
+
+#mail_check_input_box_false {
+  background-color: var(--gray-color);
+}
+#pw {
+  margin-left: 37px;
+}
+
+#pw,
+#repw {
+  margin-bottom: 0;
+}
+
+label {
+  font-size: small;
+  color: var(--text-red);
+  margin-left: 157px;
+}
+
+.pw_box {
+  padding: 75px;
+  text-align: center;
+}
+
+.pw_form button {
+  /* padding: 15px; */
+  margin-top: 22px;
+}
+/* sendMail */
+
+.newPw_input ul {
+  text-align: left;
+  height: 52px;
+  padding-bottom: 11px;
+}
+
+.newPw_input ul > li {
+  display: inline;
+}
+
+.newPw_input ul > li:nth-child(1) {
+  margin-right: 25px;
+}
+
+.newPw_box {
+  height: 317px;
+  padding: 34px;
+}
+
+.newPw_input {
+  padding-left: 127px;
+}
+
+.mail_box {
+  text-align: center;
+}
+
+span {
+  font-weight: bolder;
+  color: var(--black-color);
+}
+
+/* .codeBox {
+  padding: 70px;
+} */

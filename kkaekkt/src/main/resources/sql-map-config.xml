@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- Alias 설정 -->
+	<typeAliases>
+		<typeAlias alias="person" type="com.kkaekkt.biz.user.PersonVO"/>
+		<typeAlias alias="business" type="com.kkaekkt.biz.user.BusinessVO"/>
+		<typeAlias alias="reservation" type="com.kkaekkt.biz.reservation.ReservationVO"/>
+		<typeAlias alias="laundry" type="com.kkaekkt.biz.comm.LaundryVO"/>
+		<typeAlias alias="equipment" type="com.kkaekkt.biz.comm.EquipmentVO"/>
+		<typeAlias alias="etc" type="com.kkaekkt.biz.comm.EtcVO"/>
+		<typeAlias alias="schedule" type="com.kkaekkt.biz.comm.ScheduleVO"/>
+		<typeAlias alias="account" type="com.kkaekkt.biz.user.AccountVO"/>
+		<typeAlias alias="comment" type="com.kkaekkt.biz.comm.CommVO"/>
+		<typeAlias alias="maplist" type="com.kkaekkt.biz.map.MapListVO"/>
+		<typeAlias alias="single" type="com.kkaekkt.biz.map.SingleListVO"/>
+		<typeAlias alias="respay" type="com.kkaekkt.biz.map.ResPayVO"/>
+		<typeAlias alias="alert" type="com.kkaekkt.biz.comm.AlertVO"/>
+		<typeAlias alias="chat" type="com.kkaekkt.biz.comm.ChatVO"/>
+	</typeAliases>
+			
+	<!-- Sql Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappings/user-mapping.xml"/>
+		<mapper resource="mappings/rsv-mapping.xml"/>
+		<mapper resource="mappings/map-mapping.xml"/>
+	</mappers>
+</configuration>

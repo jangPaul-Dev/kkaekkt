@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reservationDAO">
+	<select id="getRno" resultType="_int">
+		SELECT MAX(rno) FROM reservation WHERE mno=#{mno};
+	</select>
+	<select id="getAno" resultType="_int"><!-- 등록한 알림의 번호 가져오기 -->
+		SELECT MAX(ano) FROM alert WHERE sender=#{sender};
+	</select>
+	<update id="updateAlert">
+		UPDATE alert SET state=2 WHERE ano=#{ano};
+	</update>
+	<delete id="delAlert">
+		DELETE FROM alert
+		<where>
+			addressee=#{sender} <!-- 본인이 수신자인 메시지만 삭제 -->
+			<if test="ano!=0"><!-- 입력값이 있다면 특정 알림만 삭제 -->
+				AND ano=#{ano}
+			</if>
+			<if test="state!=0"><!-- 읽음 상태값을 입력했다면 읽은 알림만 삭제-->
+				AND state=#{state}
+			</if>
+		</where>
+	</delete>
+	<select id="getAlertList" resultType="alert"><!-- 개인&업체 관계없이 이름을 불러오기 위한 쿼리문.. 필요시 분기할 예정 -->
+		SELECT ano,mname,bname,msg,a.typenum,typename,date_format(time,"%Y.%m.%d") date,state
+		FROM alert a,alerttype at, (SELECT mname,bname,ac.mno
+									FROM account ac LEFT JOIN `member` m on ac.mno=m.mno 
+                                    LEFT JOIN business b on b.mno=ac.mno) n
+		WHERE a.typenum=at.typenum
+        AND a.sender=n.mno
+        AND addressee=#{sender}
+        AND <![CDATA[TIMESTAMPDIFF(DAY,time,now())<#{datediff}]]>
+        <if test="typenum!=0"><!-- 유형을 지정했다면 -->
+        	AND a.typenum=#{typenum}
+        </if>
+        ORDER BY ano DESC;
+	</select>
+	<insert id="regitAlert"><!-- 알림 데이터 삽입 -->
+		INSERT INTO alert (sender,addressee,msg,typenum) VALUES (#{sender},#{addressee},#{msg},#{typenum});	
+	</insert>
+	<update id="insertUpdateOrderNum">
+		UPDATE comments SET orderNum=orderNum+1 WHERE <![CDATA[orderNum>=#{orderNum}]]>;
+		UPDATE comments SET replytf=1 WHERE groupNum=#{rsvNum} AND depth=0;
+	</update>
+	<update id="deleteUpdateOrderNum">
+		UPDATE comments SET orderNum=orderNum-1 WHERE <![CDATA[orderNum>#{orderNum}]]>;
+		UPDATE comments SET replytf=0 WHERE groupNum=#{rsvNum} AND depth=0;
+	</update>
+	<select id="getCustomerData" resultType="comment">
+		SELECT mno,orderNum,grade eval 
+		FROM comments
+		WHERE groupNum=#{rsvNum} AND depth=0;
+	</select>
+	<select id="getOrderNum" resultType="_int">
+		SELECT orderNum FROM comments WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</select>
+	<select id="getCommListBs" resultType="comment">
+		SELECT cno,c.mno,orderNum,content,groupNum rsvNum,date_format(rdate,'%Y.%m.%d %r') rdate,grade eval,mname,depth,replytf
+		FROM comments c, `member` m
+		<where>
+			m.mno=c.mno AND c.bno=#{bno}
+			<if test="searchOption==1"><!-- 이름검색 -->
+				AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"><!-- 주문번호검색 -->
+				AND groupNum LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==3"><!-- 평점검색 -->
+				AND grade LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="replytf==0"><!-- 답글이 달리지 않은 리뷰 보기 -->
+				AND replytf=0
+			</if>
+		</where>
+		<if test="order==1"> <!-- 등록 순이면 -->
+			ORDER BY orderNum DESC
+		</if>
+		<if test="order==2"> <!-- 평점 높은순이면 -->
+			ORDER BY grade DESC, orderNum DESC
+		</if>
+		<if test="order==3"> <!-- 평점 낮은순이면 -->
+			ORDER BY grade, orderNum DESC
+		</if>
+		LIMIT #{rowStartNum},#{COMMS_PER_PAGE};
+	</select>
+	<select id="getCommCount" resultType="_int">
+		SELECT count(cno) FROM comments c
+			<if test="searchOption==0"><!-- 검색X -->
+				WHERE c.bno=#{bno}
+			</if>
+			<if test="searchOption==1"><!-- 이름검색 -->
+				, `member` m
+				WHERE m.mno=c.mno
+				AND c.bno=#{bno}
+				AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"><!-- 주문번호검색 -->
+				WHERE groupNum LIKE CONCAT('%',#{search},'%')
+				AND c.bno=#{bno}
+			</if>
+			<if test="searchOption==3"><!-- 평점검색 -->
+				WHERE c.bno=#{bno}
+				AND grade LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="replytf==0"><!-- 답글이 달리지 않은 리뷰 보기 -->
+				AND replytf=0
+			</if>;
+	</select>
+	<update id="deleteCommCh">
+		UPDATE comments SET content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</update>
+	<delete id="deleteCommAb">
+		DELETE FROM comments WHERE depth=#{depth} AND groupNum=#{rsvNum};
+	</delete>
+	<update id="updateComm">
+		UPDATE comments SET content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</update>
+	<insert id="regitComm">
+		<if test="depth==0">
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1),0,#{eval} FROM comments;
+		</if>
+		<if test="depth==1">
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade)
+			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum},#{eval});
+		</if>
+	</insert>
+	<select id="checkLiked" resultType="_int"><!-- 좋아요 개수가 1이면 체크된 것, 0이면 되지 않은 것 -->
+		SELECT COUNT(l.bno) FROM liked l,(SELECT mno,bno FROM reservation WHERE rno=#{rsvNum}) r WHERE l.mno=r.mno AND l.bno=r.bno;
+	</select>
+	<update id="cancelRsv"><!-- 예약번호 단위 주문취소 -->
+			UPDATE reservation SET stno=4,ddate=now() WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum};
+	</update><!-- 품목단위 취소 -->
+	<update id="cancelLaundry">
+			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum}
+			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});	
+	</update>
+	<select id="chkLaundryStateTotal" resultType="_int"><!-- 하나의 예약에 등록된 모든 빨래의 상태가 변경됐는지 체크-->
+		SELECT count(lno)>0 FROM rsv_laundry WHERE rno=#{rsvNum} AND stno=1;
+	</select><!-- 1 반환이면 처리되지 않은 항목이 존재, 0 반환이면 전체 처리된 상태 -->
+	<select id="chkLaundryStateComplete" resultType="_int"><!-- 1차 작업이 완료된 품목 중 하나라도 완료상태의 품목이 있는지 체크 -->
+		SELECT count(lno)>0 FROM rsv_laundry WHERE rno=#{rsvNum} AND stno=2;
+	</select><!-- 1반환이면 완료상태의 품목 존재, 0 반환이면 전체 취소된 상태 -->
+	<update id="completeRsv"><!-- 예약번호 단위 전달완료일 경우 -->
+			UPDATE reservation SET stno=3,dDate=now() WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum} AND stno=2;<!-- 품목 중 세탁완료인 품목들 상태변경 -->
+	</update>
+	<update id="rsvDone"><!-- 예약번호 단위 세탁완료일 경우 -->
+			UPDATE reservation SET stno=2 WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=2 WHERE rno=#{rsvNum} AND stno=1;<!-- 품목 중 세탁중 상태인 품목들 상태변경 -->
+	</update>
+	<update id="laundryDone"><!-- 품목단위 빨래 끝 -->
+			UPDATE rsv_laundry SET stno=2 WHERE rno=#{rsvNum}
+			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});	
+	</update>
+	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
+		SELECT r.rno rsvNum,b.mno,r.bno,date_format(rdate,'%Y.%m.%d %r') rsvDate,bname,phone,
+		<if test="state==1">
+		<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,NOW())<1 timeOut]]>
+		</if>
+		<if test="state==3">
+		<![CDATA[	TIMESTAMPDIFF(DAY,ddate,NOW())<7 timeOut]]>
+		</if>
+		, stname state
+		FROM reservation r, business b, state s
+		WHERE r.bno=b.bno AND r.stno=s.stno
+		AND r.mno=#{mno}
+		AND r.stno=#{state}
+		ORDER BY rno DESC
+		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+	</select>
+	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
+		SELECT date_format(rdate,'%Y.%m.%d %T') rsvDate,r.mno, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,NOW()) dDay 
+		FROM reservation r, `member` m, rsv_laundry r_l, laundry_type lt 
+		<where>
+			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
+			AND bno=#{bno} AND r_l.stno=1
+			<if test="laundryType!=0">
+				AND r_l.lno=#{laundryType}
+			</if>
+			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
+					AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
+					AND r.rno LIKE CONCAT('%',#{search},'%')
+			</if>
+		</where>
+		<if test="order==1">
+			ORDER BY r.rno DESC
+		</if>
+		<if test="order==2">
+			ORDER BY dDay, r.rno DESC
+		</if>
+		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+	</select>
+	<select id="getRsvListBs_rn" resultType="reservation"> 
+		<if test="listType==3"><!-- 업체회원 주문번호별 리스트 출력 -->
+			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d %r') rsvdate,mname,DATEDIFF(ddate,NOW()) dDay
+			FROM `member` m,reservation r
+			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
+			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
+					AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
+					AND r.rno LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="order==1">
+				ORDER BY r.rno DESC
+			</if>
+			<if test="order==2">
+				ORDER BY dDay, r.rno DESC
+			</if>
+				LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+		</if>
+		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
+			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d %T') rsvdate,mname,date_format(dDate,'%Y.%m.%d %T')dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
+			FROM `member` m,reservation r,state s 
+			<where> 
+			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
+				<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
+					AND mname LIKE CONCAT('%',#{search},'%')
+				</if>
+				<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
+					AND r.rno LIKE CONCAT('%',#{search},'%')
+				</if>
+			</where>
+			AND (r.stno=2 OR r.stno=3)
+			ORDER BY r.stno, r.dDate DESC
+			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+		</if>
+	</select>
+	<select id="getCommListPs" resultType="comment">
+			SELECT mname,r.mno,bname,r.bno,content,date_format(c.rdate,'%Y.%m.%d %r') rdate,depth
+			FROM comments c, reservation r, `member` m,business b
+			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
+			AND groupNum=#{rsvNum}
+			ORDER BY orderNum DESC;
+	</select>
+	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
+			SELECT DISTINCT lname laundry, cnt count, price,stname state
+			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
+			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
+			AND r.rno=#{rsvNum};
+	</select>
+	<select id="countList" resultType="_int">
+			SELECT count(r.rno) FROM
+		<choose>
+			<when test="listType==2"> <!-- 품목별 조회일 경우 -->
+				rsv_laundry r_l, laundry_type lt, `member` m,reservation r
+			</when>
+			<otherwise> <!-- 일반 조회일 경우 -->
+				reservation r, `member` m
+			</otherwise>
+		</choose>
+		<where>
+			<if test="listType==2"> <!-- 품목별 조회일 때 -->
+				AND r_l.lno=lt.lno AND r.mno=m.mno AND r.rno=r_l.rno
+			</if>
+			<if test="listType!=2"> <!-- 일반 조회일 때 -->
+				AND r.mno=m.mno
+			</if>
+			<if test='bno==0'> <!-- 일반회원의 주문조회 -->
+				AND r.mno=#{mno}
+			</if>
+			<if test='bno!=0'> <!-- 업체회원의 주문조회 -->
+				AND bno=#{bno}
+			</if>
+			<if test="searchOption==1"> <!-- 이름검색 -->
+				AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"> <!-- 주문번호검색 -->
+				AND r.rno LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="laundryType!=0"> <!-- 품목 조회에서 '전체보기'가 아닐 경우-->
+				AND r_l.lno=#{laundryType}
+			</if>
+			<if test="listType==4">
+				AND (stno=2 OR stno=3) <!-- 완료목록일 시엔 OR 조건 추가 -->
+			</if>
+			<if test="listType==2"> <!-- 품목별 목록 -->
+				AND r_l.stno=1;
+			</if>
+			<if test="listType==1 or listType==3"> <!-- 일반회원의 목록 or 업체 회원의 처리중-품목별 목록 -->
+				AND r.stno=#{state}
+			</if>
+		</where>
+	</select>
+	<select id="getRsvMdetail" resultType="reservation"> 
+		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m.address address 
+		FROM reservation r
+		JOIN rsv_laundry rl ON r.rno = rl.rno 
+		JOIN `member` m ON m.mno = r.mno
+		WHERE r.rno=#{rsvNum};
+	</select>
+	<!-- 매출관리-->
+    <select id="getSales" resultType="laundry">
+        	SELECT date_format(r.rdate, '%Y-%m-%d') rsvDate, sum(cnt*price) price
+			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND b_l.lno=r_l.lno
+			<![CDATA[AND ( r.rdate > LAST_DAY(#{startDt} - interval 1 month) AND r.rdate <= LAST_DAY(#{endDt}) )]]>
+            AND b.bno=#{bno}
+            group by rsvDate;
+    </select>
+    <!-- 매출관리 월별 예약건수 -->
+    <select id="getRsvCount" resultType="_int">
+    		SELECT count(r.rno) count
+			FROM business b,reservation r
+			WHERE r.bno=b.bno 
+            <![CDATA[AND ( r.rdate > LAST_DAY(#{startDt} - interval 1 month) AND r.rdate <= LAST_DAY(#{endDt}) )]]>
+            AND b.bno=#{bno};
+    </select>
+</mapper>
